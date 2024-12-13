@@ -32,6 +32,7 @@ function createOperators(){
     operator.forEach(function(op){
         let ops = document.createElement("button");
         ops.classList.add("operator");
+        ops.id = op;
         let dimensions = 200/4;
         ops.style.minHeight = `${dimensions}px`;
         ops.style.minWidth = `${dimensions}px`;
@@ -45,12 +46,18 @@ function createOperators(){
 
 function usingCalculator(){
     const numpad = document.querySelectorAll(".num");
-    
+    const operatorstrip = document.querySelectorAll(".operator")
+
     numpad.forEach((num) => {
         num.addEventListener("click", (event) => {
             console.log(event.target.id);
         })
     })
     
-    
+    operatorstrip.forEach((operator) => {
+        operator.addEventListener("click", (event) => {
+            console.log(event.target.id);
+        })
+    })
+
 }
