@@ -2,6 +2,7 @@ const numbers = document.querySelector(".numbers");
 const base = document.querySelector("div");
 const operators = document.querySelector(".operators");
 const display = document.querySelector(".workingMath");
+let equation = [];
 
 document.addEventListener("DOMContentLoaded", function(){
    createNumpad();
@@ -47,30 +48,70 @@ function createOperators(){
 
 function usingCalculator(){
     const numpad = document.querySelectorAll(".num");
-    const operatorstrip = document.querySelectorAll(".operator")
-    let equation = [0];
-    let execute = 0;
+    const allOperators = document.querySelectorAll(".operator")
 
     numpad.forEach((num) => {
         num.addEventListener("click", (event) => {
-            console.log(event.target.id);
-            equation.push(event.target.id);
-            displayMath(equation);
+            //console.log(event.target.id);
+            displayMath(event.target.id);
         })
     })
     
-    operatorstrip.forEach((operator) => {
+    allOperators.forEach((operator) => {
         operator.addEventListener("click", (event) => {
-            console.log(event.target.id);
-            equation.push(event.target.id);
-            displayMath(equation);
+            //console.log(event.target.id);
+            displayMath(event.target.id);
         })
     })
-
 
     
 }
 
-function displayMath (inputs){
-    display.textContent = inputs.join("");
+function displayMath (input){
+    const nums = [1,2,3,4,5,6,7,8,9,0];
+    const opss = ['+','-','*','/'];
+    let executed = 0;
+    
+    //checks if they are pressing an operator without number and returns 0 and operator
+    if(opss.includes(input)&&equation.length < 1){
+        equation = [0];
+        equation.push(input);
+    }
+
+    //checks if they there are any other operators in the equation already    
+    if(opss.includes(input)){
+        if(opss.includes(equation[equation.length-1])){
+            equation.pop();
+            equation.push(input);
+        }else{
+            if(opss.some(r => equation.includes(r))){
+                //evaluate
+            }else{
+                equation.push(input);
+            }
+        }
+       
+        
+    }
+    
+    
+    if(input == "="){
+        if(equation.length < 1){
+            equation = [0];
+        }
+        if(opss.includes(input)&&equation.length < 1){
+            equation = [0];
+            equation.push(input);
+        }
+        //evaluate
+    }
+
+    if(nums.includes(input*1)){
+        equation.push(input);
+    }
+
+    if(executed == 1){
+        equation = [];
+    }
+    display.textContent = equation.join("");
 }
