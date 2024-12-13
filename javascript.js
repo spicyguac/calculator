@@ -5,7 +5,7 @@ const operators = document.querySelector(".operators");
 document.addEventListener("DOMContentLoaded", function(){
    createNumpad();
    createOperators();
-   pressedNumpad();
+   usingCalculator();
 })
 
 function createNumpad(){
@@ -43,7 +43,7 @@ function createOperators(){
 }
 
 
-function pressedNumpad(){
+function usingCalculator(){
     const numpad = document.querySelectorAll(".num");
     
     numpad.forEach((num) => {
@@ -51,5 +51,6 @@ function pressedNumpad(){
             console.log(event.target.id);
         })
     })
+    
     
 }
