@@ -1,6 +1,7 @@
 const numbers = document.querySelector(".numbers");
 const base = document.querySelector("div");
 const operators = document.querySelector(".operators");
+const display = document.querySelector(".workingMath");
 
 document.addEventListener("DOMContentLoaded", function(){
    createNumpad();
@@ -47,17 +48,29 @@ function createOperators(){
 function usingCalculator(){
     const numpad = document.querySelectorAll(".num");
     const operatorstrip = document.querySelectorAll(".operator")
+    let equation = [0];
+    let execute = 0;
 
     numpad.forEach((num) => {
         num.addEventListener("click", (event) => {
             console.log(event.target.id);
+            equation.push(event.target.id);
+            displayMath(equation);
         })
     })
     
     operatorstrip.forEach((operator) => {
         operator.addEventListener("click", (event) => {
             console.log(event.target.id);
+            equation.push(event.target.id);
+            displayMath(equation);
         })
     })
 
+
+    
+}
+
+function displayMath (inputs){
+    display.textContent = inputs.join("");
 }
