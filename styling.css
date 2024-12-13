@@ -24,10 +24,13 @@
 
 .display {
     flex-grow: 2;
+    padding: 0;
 }
 
 .numsNops {
     flex-grow: 2;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .clear {
@@ -40,13 +43,19 @@
     flex-wrap: wrap;
     margin: 0px;
     padding: 0px;
-    height: 200px;
-    width: 150px;
     max-height: 200px;
     max-width: 150px;
 }
 
+
 .num {
     background-color: palevioletred;
+}
+
+.operator {
+    display: flex;
+    flex-grow: 1;
+    background-color: aliceblue;
+
 }
 
