@@ -4,6 +4,7 @@ const operators = document.querySelector(".operators");
 const display = document.querySelector(".workingMath");
 let equation = [];
 const clear = document.querySelector("#clear");
+const equals = document.querySelector("#equals");
 
 document.addEventListener("DOMContentLoaded", function(){
    createNumpad();
@@ -69,6 +70,10 @@ function usingCalculator(){
         displayMath("clear");
     })
 
+    equals.addEventListener("click", (event) => {
+        displayMath("=");
+    })
+
     
 }
 
@@ -109,6 +114,10 @@ function displayMath (input){
         if(opss.includes(input)&&equation.length < 1){
             equation = [0];
             equation.push(input);
+        }
+        if(opss.includes(equation[equation.length - 1]) == false){
+            solution = evaluate(equation);
+            equation = [solution];
         }
         //evaluate
     }
@@ -151,7 +160,7 @@ function evaluate(array){
             solution = firstNum * secondNum
             break;
         case '/':
-            solution = firstNum / secondNum
+            solution = Math.round((firstNum / secondNum) * 100)/100
             break;
         default:
             solution = 0; 
