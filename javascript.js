@@ -3,6 +3,7 @@ const base = document.querySelector("div");
 const operators = document.querySelector(".operators");
 const display = document.querySelector(".workingMath");
 let equation = [];
+const clear = document.querySelector("#clear");
 
 document.addEventListener("DOMContentLoaded", function(){
    createNumpad();
@@ -64,14 +65,21 @@ function usingCalculator(){
         })
     })
 
+    clear.addEventListener("click", (event) => {
+        displayMath("clear");
+    })
+
     
 }
 
 function displayMath (input){
     const nums = [1,2,3,4,5,6,7,8,9,0];
     const opss = ['+','-','*','/'];
-    let executed = 0;
     let solution = 0;
+
+    if(input == "clear"){
+        equation = [];
+    }
 
     //checks if they are pressing an operator without number and returns 0 and operator
     if(opss.includes(input)&&equation.length < 1){
@@ -94,7 +102,6 @@ function displayMath (input){
         }       
     }
     
-    
     if(input == "="){
         if(equation.length < 1){
             equation = [0];
@@ -110,10 +117,8 @@ function displayMath (input){
         equation.push(input);
     }
 
-    if(executed == 1){
-        equation = [];
-    }
     display.textContent = equation.join("");
+
 }
 
 function evaluate(array){
