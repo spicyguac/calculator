@@ -71,7 +71,8 @@ function displayMath (input){
     const nums = [1,2,3,4,5,6,7,8,9,0];
     const opss = ['+','-','*','/'];
     let executed = 0;
-    
+    let solution = 0;
+
     //checks if they are pressing an operator without number and returns 0 and operator
     if(opss.includes(input)&&equation.length < 1){
         equation = [0];
@@ -85,13 +86,12 @@ function displayMath (input){
             equation.push(input);
         }else{
             if(opss.some(r => equation.includes(r))){
-                //evaluate
+                solution = evaluate(equation);
+                equation = [solution];
             }else{
                 equation.push(input);
             }
-        }
-       
-        
+        }       
     }
     
     
@@ -114,4 +114,44 @@ function displayMath (input){
         equation = [];
     }
     display.textContent = equation.join("");
+}
+
+function evaluate(array){
+    let op = "";
+    let solution = 0;
+
+    array.forEach((input) => {
+        if(Number.isInteger(input*1)==false){
+            op = input;      
+        }
+    })
+
+    let firstNum = array.slice(0, array.indexOf(op)).join("")*1;
+    let secondNum = array.slice(array.indexOf(op)+1, array.length).join("")*1;
+    
+    console.log(array,firstNum, secondNum, op);
+
+    if(op=='/' && secondNum == 0){
+        return solution = 'you twat';
+    }
+    
+    switch (op) {
+        case '+':
+            solution = firstNum + secondNum
+            break;
+        case '-':
+            solution = firstNum - secondNum
+            break;
+        case '*':
+            solution = firstNum * secondNum
+            break;
+        case '/':
+            solution = firstNum / secondNum
+            break;
+        default:
+            solution = 0; 
+    }
+
+    return solution;
+
 }
